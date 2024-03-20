@@ -10,4 +10,4 @@ set -e
 publish 'actions'
 publish 'java17'
 publish 'java21'
-#publish 'texlive'
+publish 'texlive'
