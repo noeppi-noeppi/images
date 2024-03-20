@@ -1,8 +1,8 @@
-FROM x-template:actions
-ARG JDK_URL
+FROM images/actions
+ARG JDK
 RUN <<EOV
 mkdir -p /opt/java
-wget -nv -O - "${JDK_URL}" | tar -C /opt/java -xz
+wget -nv -O - "https://github.com/adoptium/temurin21-binaries/releases/download/${JDK}" | tar -C /opt/java -xz
 find /opt/java -path '*/bin/*' | while read z; do
   ln -s "${z}" "/usr/local/bin/$(basename "${z}")"
 done
