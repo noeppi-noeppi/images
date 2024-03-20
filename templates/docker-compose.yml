@@ -1,0 +1,5 @@
+services:
+  actions:
+    image: x-template:actions
+    build:
+      context: actions
