@@ -35,4 +35,4 @@ jobs:
       - name: 'Publish docker images'
         shell: bash
         working-directory: images
-        run: docker compose push --dry-run
+        run: docker compose push
