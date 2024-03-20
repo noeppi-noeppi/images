@@ -1,4 +1,4 @@
-FROM images/actions
+FROM localhost/images/actions
 ARG JDK
 RUN <<EOV
 mkdir -p /opt/java

@@ -1,7 +1,13 @@
 #!/bin/bash
+
+function publish {
+  docker tag "localhost/images/${1}:latest" "ghcr.io/noeppi-noeppi/images/${1}:latest"
+  docker push "ghcr.io/noeppi-noeppi/images/${1}:latest"
+}
+
 set -e
 
-docker push 'images/actions:latest'
-docker push 'images/java17:latest'
-docker push 'images/java21:latest'
-#docker push 'images/texlive:latest'
+publish 'actions'
+publish 'java17'
+publish 'java21'
+#publish 'texlive'
