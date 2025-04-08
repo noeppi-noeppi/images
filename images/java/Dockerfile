@@ -1,11 +1,14 @@
+FROM debian:bookworm AS setup-java
+ARG JDK
+
+# Set up JDKs for the agent image
+RUN apt-get update && apt-get install -y curl jq && apt-get clean
+COPY --chown=root:root --chmod=00755 download-java.sh /download-java.sh
+RUN bash /download-java.sh "${JDK}"
+
 FROM localhost/images/actions
 ARG JDK
-RUN <<EOV
-set -e
-mkdir -p /opt/java/jdk
-wget -nv -O - "${JDK}" | tar -C /opt/java/jdk -xz --strip-components=1
-find /opt/java/jdk/bin -mindepth 1 -maxdepth 1 | while read z; do
-  ln -s "${z}" "/usr/local/bin/$(basename "${z}")"
-done
-EOV
-ENV JAVA_HOME="/opt/java/jdk"
+
+COPY --from=setup-java /opt/java /opt/java
+ENV JAVA_HOME="/opt/java/jdk-${JDK}"
+ENV PATH="/opt/java/jdk-${JDK}/bin:${PATH}"
