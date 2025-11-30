@@ -9,6 +9,7 @@ RUN bash /download-java.sh "${JDK}"
 FROM ghcr.io/noeppi-noeppi/images/actions
 ARG JDK
 
+RUN apt-get update && apt-get install -y ca-certificates-java && apt-get clean
 COPY --from=setup-java /opt/java /opt/java
 ENV JAVA_HOME="/opt/java/jdk-${JDK}"
 ENV PATH="/opt/java/jdk-${JDK}/bin:${PATH}"
