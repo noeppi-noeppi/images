@@ -1,7 +1,6 @@
 FROM debian:trixie AS setup-java
 ARG JDK
 
-# Set up JDKs for the agent image
 RUN apt-get update && apt-get install -y curl jq && apt-get clean
 COPY --chown=root:root --chmod=00755 download-java.sh /download-java.sh
 RUN bash /download-java.sh "${JDK}"
