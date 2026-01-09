@@ -16,7 +16,7 @@ function build {
   local IMG="${1}"
   shift
   if arrayContains "build" "${ACTIONS[@]}"; then
-    docker build -t "ghcr.io/noeppi-noeppi/images/${IMG}:latest" "$@"
+    docker build --pull -t "ghcr.io/noeppi-noeppi/images/${IMG}:latest" "$@"
   fi
   if arrayContains "publish" "${ACTIONS[@]}"; then
     local DISCRIMINATOR=0
